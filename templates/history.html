@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="section">
+
+            <h2>User assets</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Dealtype</th>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Shares</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Datetime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- TODO: Loop through the database entries to display them in this table -->
+
+                    {% for dict_item in history %}
+                        <tr>
+                            <td>{{ dict_item["deal"] }}</td>
+                            <td>{{ dict_item["symbol"] }}</td>
+                            <td>{{ dict_item["name"]}}</td>
+                            <td>{{ dict_item["quantity"]}}</td>
+                            <td>{{ usd(dict_item["price"])}}</td>
+                            <td>{{ usd(dict_item["summ"])  }}</td>
+                            <td>{{ dict_item["time"] }}</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="section">
+
+            <h2>User assets</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Shares</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- TODO: Loop through the database entries to display them in this table -->
+
+                    {% for dict_item in portf %}
+                        <tr>
+                            <td>{{ dict_item["symbol"] }}</td>
+                            {% set symbol = dict_item["symbol"] %}
+                            <td>{{ dict_item["name"]}}</td>
+                            <td>{{ dict_item["quantity"]}}</td>
+                            <td>{{ usd(currentprice[symbol])}}</td>
+                            <td>{{ usd((currentprice[symbol]) * dict_item["quantity"])  }}</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                        <td class="border-0 text-end">{{cash}}</td>
+                    </tr>
+                    <tr>
+                        <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                        <td class="border-0 w-bold text-end">{{total}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}
